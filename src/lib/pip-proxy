@@ -6,16 +6,17 @@ pip_proxy() {
     PIP_INDEX_URL='https://pypi.python.org/simple'
     PIP_TRUSTED_HOST='127.0.0.1'
      
-    if [ "${SET_PIP_PROXY}" = "1" ]; then
-        if [ "${DOCKER_ROUTE}x" = "x" ]; then
-            info "DOCKER_ROUTE not set"
+    if [ "${CCG_PIP_PROXY}" = "1" ]; then
+        if [ "${PIP_PROXY_HOST}x" = "x" ]; then
+            PIP_PROXY_HOST=${DOCKER_ROUTE}
+        fi
+        if [ "${PIP_PROXY_HOST}x" = "x" ]; then
+            warn  "CCG_PIP_PROXY is set but I couldn't detect a pip proxy config. I tried PIP_PROXY_HOST and then DOCKER_ROUTE. You can disable PIP proxying by setting CCG_PIP_PROXY=0"
             return
         fi
         # use a local devpi install
-        PIP_INDEX_URL="http://${DOCKER_ROUTE}:3141/root/pypi/+simple/"
-        PIP_TRUSTED_HOST="${DOCKER_ROUTE}"
-    else
-        info "SET_PIP_PROXY disabled proxy"
+        PIP_INDEX_URL="http://${PIP_PROXY_HOST}:3141/root/pypi/+simple/"
+        PIP_TRUSTED_HOST="${PIP_PROXY_HOST}"
     fi
  
     export PIP_INDEX_URL PIP_TRUSTED_HOST
