@@ -1,7 +1,21 @@
 docker-ccg-docker
 =================
 
-Its the official docker compose container and some convenience sh scripts.
+Its the official docker compose container with some convenience CCG sh scripts.
+
+Build using docker:
+
+.. code:: bash
+
+ > docker build -t muccg/ccg-composer:latest .
+
+Then, it can build itself:
+
+.. code:: bash
+
+ > ./develop.sh build latest
+
+Usage is shown to pad out this README.
 
 .. code:: bash
 
