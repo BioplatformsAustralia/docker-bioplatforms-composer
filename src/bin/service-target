@@ -1,0 +1,30 @@
+#!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+
+# A generic script to perform a function on a docker-compose target
+
+## ./develop.sh start [target|-]                 (start - optional target chooses compose file)
+## ./develop.sh up [target|-]                    (up - optional target chooses compose file)
+## ./develop.sh stop [target|-]                  (stop - optional target chooses compose file)
+## ./develop.sh down [target|-]                  (down - optional target chooses compose file)
+## ./develop.sh run [target|-]                   (run - optional target chooses compose file)
+
+ACTION=$(basename "$0")
+
+# target is optional, default to docker-compose.yml
+if [ "$1x" = "x" ] || [ "$1" = "-" ]; then
+    TARGET="docker-compose.yml"
+else
+    TARGET="docker-compose-$1.yml"
+fi
+shift
+
+# check we have a compose file
+if [ -f "${TARGET}" ]; then
+    info "${ACTION} ${TARGET}"
+else
+    fail "No target ${TARGET}"
+fi
+
+set -x
+exec docker-compose --project-name "${CCG_PROJECT}" -f "${TARGET}" "${ACTION}" "$@"

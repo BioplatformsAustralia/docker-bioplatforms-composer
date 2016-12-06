@@ -1,0 +1,22 @@
+#!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+
+pip_proxy() {
+    # pip default{
+    PIP_INDEX_URL='https://pypi.python.org/simple'
+    PIP_TRUSTED_HOST='127.0.0.1'
+     
+    if [ "${SET_PIP_PROXY}" = "1" ]; then
+        if [ "${DOCKER_ROUTE}x" = "x" ]; then
+            info "DOCKER_ROUTE not set"
+            return
+        fi
+        # use a local devpi install
+        PIP_INDEX_URL="http://${DOCKER_ROUTE}:3141/root/pypi/+simple/"
+        PIP_TRUSTED_HOST="${DOCKER_ROUTE}"
+    else
+        info "SET_PIP_PROXY disabled proxy"
+    fi
+ 
+    export PIP_INDEX_URL PIP_TRUSTED_HOST
+}

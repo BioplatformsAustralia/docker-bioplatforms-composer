@@ -1,0 +1,25 @@
+#!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+. "${CCG_COMPOSER_HOME}"/lib/git-tag
+
+# A generic script to perform a function on a service from docker-compose-build.yml
+
+## ./develop.sh build [service]                  (build a service from docker-compose-build.yml)
+## ./develop.sh push [service]                   (push an image from docker-compose-build.yml)
+
+ACTION=$(basename "$0")
+TARGET="docker-compose-build.yml"
+
+info "${ACTION} ${TARGET}"
+git_tag
+
+# Legacy: set some default build options
+OPTS=''
+if [ "${ACTION}" = "build" ]; then
+    docker_options
+    OPTS=${DOCKER_COMPOSE_BUILD_OPTS}
+fi
+
+set -x
+# shellcheck disable=SC2086 disable=SC2068
+exec docker-compose -f "${TARGET}" "${ACTION}" ${OPTS} "$@"

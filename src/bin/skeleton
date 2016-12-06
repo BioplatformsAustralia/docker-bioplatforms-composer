@@ -1,0 +1,8 @@
+#!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+
+## ./develop.sh skeleton                         (Update/Create develop.sh script)
+
+info 'create develop script'
+cp "${CCG_COMPOSER_HOME}"/share/develop.sh .
+success ''

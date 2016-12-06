@@ -1,0 +1,20 @@
+#!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+
+http_proxy() {
+    if [ "${SET_HTTP_PROXY}" = "1" ]; then
+        if [ "${DOCKER_ROUTE}x" = "x" ]; then
+            info "DOCKER_ROUTE not set"
+            return
+        fi
+        http_proxy="http://${DOCKER_ROUTE}:3128"
+        HTTP_PROXY="http://${DOCKER_ROUTE}:3128"
+        NO_PROXY=${DOCKER_ROUTE}
+        no_proxy=${DOCKER_ROUTE}
+    else
+        info "SET_HTTP_PROXY disabled proxy"
+        return
+    fi
+ 
+    export HTTP_PROXY http_proxy NO_PROXY no_proxy
+}

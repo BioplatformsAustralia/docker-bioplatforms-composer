@@ -1,0 +1,28 @@
+#!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+
+## ./develop.sh sanity                           (Print some info for sanity checking)
+
+info 'sanity'
+info "whoami                    ($(whoami))"
+info "id                        ($(id))"
+info "docker-compose            ($(docker-compose --version))"
+info "PROJECT_NAME              (${CCG_PROJECT})"
+info "DOCKER_ORG                (${CCG_DOCKER_ORG})"
+info "DOCKER_IMAGE              (${DOCKER_IMAGE})"
+docker_options
+info "DOCKER_COMPOSE_BUILD_OPTS (${DOCKER_COMPOSE_BUILD_OPTS})"
+info "DOCKER_BUILD_OPTS         (${DOCKER_BUILD_OPTS})"
+info "git                       ($(git --version))"
+info "pwd                       ($(pwd))"
+info "DOCKER_ROUTE              (${DOCKER_ROUTE})"
+# shellcheck disable=2154
+info "http_proxy                (${http_proxy})"
+info "PIP_INDEX_URL             (${PIP_INDEX_URL})"
+info "git status -s"
+git status -s
+if [ -f .env ]; then
+    info "Found an .env file"
+else
+    warn "No .env file"
+fi

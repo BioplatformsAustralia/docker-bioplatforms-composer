@@ -1,0 +1,45 @@
+#!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+
+# figure out what branch/tag we are on
+git_tag() {
+    if [ -d .git ]; then
+        info 'Found a git repo'
+    else
+        info "Not a git repo"
+        return
+    fi
+
+    set +e
+    GIT_TAG=$(git describe --abbrev=0 --tags 2> /dev/null)
+    set -e
+
+    # jenksins sets BRANCH_NAME, so we use that
+    # otherwise ask git
+    GIT_BRANCH="${BRANCH_NAME}"
+    if [ -z "${GIT_BRANCH}" ]; then
+        GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
+    fi
+    info "Git branch: ${GIT_BRANCH}"
+
+    # fail when we don't know branch
+    if [ "${GIT_BRANCH}" = "HEAD" ]; then
+        fail 'Git clone is in detached HEAD state and BRANCH_NAME not set'
+    fi
+
+    # only use tags when on master (prod) branch
+    if [ "${GIT_BRANCH}" != "master" ]; then
+        info 'Ignoring tags, not on master branch'
+        GIT_TAG=${GIT_BRANCH}
+    fi
+
+    # if no git tag, then use branch name
+    if [ "x${GIT_TAG}" = "x" ]; then
+        info 'No git tag set, using branch name'
+        GIT_TAG=${GIT_BRANCH}
+    fi
+
+    export GIT_TAG GIT_BRANCH
+
+    success "Git tag: ${GIT_TAG}"
+}
