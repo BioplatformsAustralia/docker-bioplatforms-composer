@@ -10,7 +10,10 @@ node {
     dockerStage('Dev build') {
         echo "Branch is: ${env.BRANCH_NAME}"
         echo "Build is: ${env.BUILD_NUMBER}"
-        sh('./develop.sh build dev')
+        sh('''
+            ./develop.sh env
+            ./develop.sh build dev
+        ''')
     }
 
     if (deployable_branches.contains(env.BRANCH_NAME)) {
