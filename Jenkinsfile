@@ -30,11 +30,11 @@ node {
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerbot',
                               usernameVariable: 'DOCKER_USERNAME',
                               passwordVariable: 'DOCKER_PASSWORD']]) {
-                sh('''
+                sh("""
                     docker login -u "${env.DOCKER_USERNAME}" --password="${env.DOCKER_PASSWORD}"
                     ./develop.sh push prod
                     ./develop.sh push latest
-                ''')
+                """)
             }
         }
     }
