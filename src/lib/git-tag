@@ -17,7 +17,7 @@ git_tag() {
     # jenksins sets BRANCH_NAME, so we use that
     # otherwise ask git
     GIT_BRANCH="${BRANCH_NAME}"
-    if [ -z "${GIT_BRANCH}" ]; then
+    if [ "${GIT_BRANCH}x" = "x" ]; then
         GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
     fi
     info "Git branch: ${GIT_BRANCH}"
