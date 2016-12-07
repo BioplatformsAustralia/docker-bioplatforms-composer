@@ -1,5 +1,5 @@
 #!/bin/sh
-set +x
+set -x
 set -e
 
 : "${CCG_DOCKER_ORG:=muccg}"
