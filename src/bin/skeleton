@@ -1,8 +1,20 @@
 #!/bin/sh
 . "${CCG_COMPOSER_HOME}"/lib/lib.sh
 
-## ./develop.sh skeleton                         (Update/Create develop.sh script)
+## ./develop.sh skeleton                         (Update/Create develop.sh/.env)
 
 info 'create develop script'
+if [ -f develop.sh ]; then
+    diff "${CCG_COMPOSER_HOME}"/share/develop.sh develop.sh
+fi
+
 cp "${CCG_COMPOSER_HOME}"/share/develop.sh .
+info "Updated develop.sh"
+
+if [ -f .env ]; then
+    info ".env already exists"
+else
+    cp "${CCG_COMPOSER_HOME}"/share/env .env
+    info "Created .env, please edit CCG_PROJECT"
+fi
 success ''
