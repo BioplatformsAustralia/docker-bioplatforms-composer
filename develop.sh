@@ -1,5 +1,5 @@
 #!/bin/sh
-set -x
+set +x
 set -e
 
 : "${CCG_DOCKER_ORG:=muccg}"
@@ -36,5 +36,5 @@ docker run --rm ${ENV_OPT} \
     -v "$(pwd)":"$(pwd)" \
     -v ${HOME}/.docker:/data/.docker \
     -w "$(pwd)" \
-    -it "${CCG_DOCKER_ORG}"/"${CCG_COMPOSER}":"${CCG_COMPOSER_VERSION}" \
+    -i "${CCG_DOCKER_ORG}"/"${CCG_COMPOSER}":"${CCG_COMPOSER_VERSION}" \
     "$@"
