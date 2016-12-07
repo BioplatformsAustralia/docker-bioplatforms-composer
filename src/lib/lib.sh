@@ -2,7 +2,7 @@
 set -a
 
 : "${DOCKER_BUILD_PROXY:=--build-arg http_proxy}"
-: "${DOCKER_IMAGE:=${DOCKER_ORG}/${PROJECT_NAME}}"
+: "${DOCKER_IMAGE:=${CCG_DOCKER_ORG}/${CCG_PROJECT}}"
 : "${DOCKER_NO_CACHE:=0}"
 : "${DOCKER_PULL:=0}"
 
