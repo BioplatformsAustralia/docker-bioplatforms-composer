@@ -31,7 +31,7 @@ node {
                               usernameVariable: 'DOCKER_USERNAME',
                               passwordVariable: 'DOCKER_PASSWORD']]) {
                 sh('''
-                    ./develop.sh ci-docker-login
+                    docker login -u "${env.DOCKER_USERNAME}" --password="${env.DOCKER_PASSWORD}"
                     ./develop.sh push prod
                     ./develop.sh push latest
                 ''')
