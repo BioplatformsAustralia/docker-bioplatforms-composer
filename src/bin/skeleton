@@ -3,18 +3,24 @@
 
 ## ./develop.sh skeleton                         (Update/Create develop.sh/.env)
 
-info 'create develop script'
+update_required=0
 if [ -f develop.sh ]; then
+    info 'develop.sh: found existing, any changes will be shown:'
     diff "${CCG_COMPOSER_HOME}"/share/develop.sh develop.sh
+    update_required=$?
 fi
 
-cp "${CCG_COMPOSER_HOME}"/share/develop.sh .
-info "Updated develop.sh"
+if [ "${update_required}" = 1 ]; then
+    cp "${CCG_COMPOSER_HOME}"/share/develop.sh .
+    info "develop.sh: Updated"
+else
+    info "develop.sh: No update required"
+fi
 
 if [ -f .env ]; then
-    info ".env already exists"
+    info ".env: already exists, not changing"
 else
     cp "${CCG_COMPOSER_HOME}"/share/env .env
-    info "Created .env, please edit CCG_PROJECT"
+    info ".env: Created, please edit CCG_PROJECT and add any vars required in environment"
 fi
 success ''
