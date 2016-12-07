@@ -12,6 +12,7 @@ node {
         echo "Build is: ${env.BUILD_NUMBER}"
         sh('''
             ./develop.sh env
+            ./develop.sh sanity
             ./develop.sh build dev
         ''')
     }
