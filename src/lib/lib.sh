@@ -2,14 +2,12 @@
 set -a
 
 : "${DOCKER_BUILD_PROXY:=--build-arg http_proxy}"
-: "${DOCKER_USE_HUB:=0}"
 : "${DOCKER_IMAGE:=${DOCKER_ORG}/${PROJECT_NAME}}"
 : "${DOCKER_NO_CACHE:=0}"
 : "${DOCKER_PULL:=0}"
 
 # Do not set these, they are vars used below
 DOCKER_BUILD_OPTS=''
-#DOCKER_RUN_OPTS='-e PIP_INDEX_URL -e PIP_TRUSTED_HOST'
 DOCKER_COMPOSE_BUILD_OPTS=''
 
 
@@ -50,7 +48,7 @@ docker_options() {
          DOCKER_COMPOSE_BUILD_NOCACHE=""
     fi
 
-    DOCKER_BUILD_OPTS="${DOCKER_BUILD_OPTS} ${DOCKER_BUILD_NOCACHE} ${DOCKER_BUILD_PROXY} ${DOCKER_BUILD_PULL} ${DOCKER_BUILD_PIP_PROXY}"
+    DOCKER_BUILD_OPTS="${DOCKER_BUILD_OPTS} ${DOCKER_BUILD_NOCACHE} ${DOCKER_BUILD_PULL}"
 
     # compose does not expose all docker functionality, so we can't use compose to build in all cases
     DOCKER_COMPOSE_BUILD_OPTS="${DOCKER_COMPOSE_BUILD_OPTS} ${DOCKER_COMPOSE_BUILD_NOCACHE} ${DOCKER_COMPOSE_BUILD_PULL}"
