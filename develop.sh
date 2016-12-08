@@ -1,5 +1,5 @@
 #!/bin/sh
-set +x
+set -x
 set -e
 
 : "${CCG_DOCKER_ORG:=muccg}"
@@ -29,6 +29,8 @@ if [ "$(uname)" != "Darwin" ]; then
     set -e
     export DOCKER_ROUTE
 fi
+
+echo $-
 
 TTY_OPTS='--interactive --tty'
 if echo $- | grep -q "i" ; then
