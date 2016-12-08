@@ -1,0 +1,9 @@
+#!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/git-tag
+
+## ./develop.sh run-builder                      (Run a build, typically produces a release tarball)
+
+# Legacy: Runs the builder service in the build yaml. This is how release tarballs are created, for instance.
+
+git_tag
+run build builder "$@"
