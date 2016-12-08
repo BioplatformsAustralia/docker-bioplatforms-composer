@@ -8,10 +8,12 @@ set -e
 : "${CCG_PIP_PROXY=0}"
 : "${CCG_HTTP_PROXY=0}"
 
+export CCG_DOCKER_ORG CCG_COMPOSER CCG_COMPOSER_VERSION CCG_PIP_PROXY CCG_HTTP_PROXY
+
 # ensure we have an .env file
-ENV_OPT=''
+ENV_FILE_OPT=''
 if [ -f .env ]; then
-    ENV_OPT='--env-file .env'
+    ENV_FILE_OPT='--env-file .env'
     set +e
     . ./.env > /dev/null 2>&1
     set -e
@@ -28,13 +30,14 @@ if [ "$(uname)" != "Darwin" ]; then
     export DOCKER_ROUTE
 fi
 
+ENV_OPTS="$(env | sort | cut -d= -f1 | grep "^CCG_[a-zA-Z0-9_]*$" | awk '{print "-e", $1}')"
 # shellcheck disable=SC2086 disable=SC2048
-docker run --rm ${ENV_OPT} \
-    "$(env | cut -d= -f1 | awk '{print "-e", $1}')" \
+docker run --rm ${ENV_FILE_OPT} \
+    ${ENV_OPTS} \
     -v /etc/timezone:/etc/timezone:ro \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -v "$(pwd)":"$(pwd)" \
-    -v ${HOME}/.docker:/data/.docker \
+    -v "${HOME}"/.docker:/data/.docker \
     -w "$(pwd)" \
-    -it "${CCG_DOCKER_ORG}"/"${CCG_COMPOSER}":"${CCG_COMPOSER_VERSION}" \
+    -i "${CCG_DOCKER_ORG}"/"${CCG_COMPOSER}":"${CCG_COMPOSER_VERSION}" \
     "$@"
