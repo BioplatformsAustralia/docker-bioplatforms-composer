@@ -1,5 +1,5 @@
 #!/bin/sh
-set -x
+set +x
 set -e
 
 : "${CCG_DOCKER_ORG:=muccg}"
@@ -30,11 +30,9 @@ if [ "$(uname)" != "Darwin" ]; then
     export DOCKER_ROUTE
 fi
 
-echo $-
-
-TTY_OPTS='--interactive --tty'
-if echo $- | grep -q "i" ; then
-    TTY_OPTS=''
+TTY_OPTS=''
+if echo xe | grep -q "i" ; then
+    TTY_OPTS='--interactive --tty'
 fi
 
 ENV_OPTS="$(env | sort | cut -d= -f1 | grep "^CCG_[a-zA-Z0-9_]*$" | awk '{print "-e", $1}')"
