@@ -26,5 +26,11 @@ else
     fail "No target ${TARGET}"
 fi
 
+# Legacy: set some default options
+OPTS=''
+if [ "${ACTION}" = "run" ]; then
+    OPTS='--rm'
+fi
+
 set -x
-exec docker-compose --project-name "${CCG_PROJECT}" -f "${TARGET}" "${ACTION}" "$@"
+exec docker-compose --project-name "${CCG_PROJECT}" -f "${TARGET}" "${ACTION}" ${OPTS} "$@"
