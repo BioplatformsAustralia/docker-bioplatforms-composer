@@ -1,0 +1,35 @@
+#!/bin/sh
+
+## ./develop.sh aloe <service>                   (legacy: Runs aloe against the teststack yml)
+
+stop_all() {
+    stop aloe
+    stop teststack
+    stop selenium
+}
+
+
+trap "stop_all; exit" SIGHUP SIGINT SIGTERM
+
+# start selenium in the background
+pull selenium --ignore-pull-failures
+up selenium --force-recreate -d
+
+# start the test stack in the background
+stop teststack
+rm teststack --all -v --force
+up teststack --force-recreate -d
+
+# run aloe
+stop aloe
+rm aloe --all -v --force
+set +e
+run aloe "$@"
+local rval=$?
+set -e
+ 
+# stop test stack and selenium
+stop teststack
+stop selenium
+
+exit $rval
