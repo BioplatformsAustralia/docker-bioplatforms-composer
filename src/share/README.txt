@@ -18,7 +18,7 @@
 ##   > ./develop.sh push prod                              (push prod image, assumes authenticated)
 ##
 ## Example (Build and start dev):
-##   > ./develop.sh build base                             (build base image)
+##   > ./develop.sh build base builder                     (build base and builder image)
 ##   > ./develop.sh build dev                              (build dev image)
 ##   > ./develop.sh up                                     (up dev stack)
 ##

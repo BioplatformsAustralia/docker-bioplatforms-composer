@@ -1,5 +1,5 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+. "${CCG_COMPOSER_HOME}"/lib/logging
 
 # figure out what branch/tag we are on
 git_tag() {

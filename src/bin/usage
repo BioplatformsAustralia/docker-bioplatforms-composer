@@ -1,5 +1,4 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/lib.sh
 
 ## ./develop.sh usage
 

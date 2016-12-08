@@ -7,13 +7,22 @@ node {
         checkout scm
     }
 
-    dockerStage('Dev build') {
+    dockerStage('Build') {
         echo "Branch is: ${env.BRANCH_NAME}"
         echo "Build is: ${env.BUILD_NUMBER}"
         sh('''
+            ./develop.sh build latest
+        ''')
+    }
+
+    dockerStage('Sanity') {
+        sh('''
+            ./develop.sh
             ./develop.sh env
             ./develop.sh sanity
-            ./develop.sh build dev
+            ./develop.sh config build --services
+            ./develop.sh stop build
+            ./develop.sh skeleton
         ''')
     }
 
@@ -21,7 +30,6 @@ node {
 
         dockerStage('Prod build') {
             sh('''
-                ./develop.sh build latest
                 ./develop.sh build prod
             ''')
         }

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+## ./develop.sh check-migrations                 (check django migrations)
+
+run - runserver django-admin makemigrations --dry-run --noinput --check
+rval=$?
+stop
+exit "${rval}"

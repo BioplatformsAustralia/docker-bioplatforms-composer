@@ -1,5 +1,5 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+. "${CCG_COMPOSER_HOME}"/lib/logging
 
 http_proxy() {
     if [ "${CCG_HTTP_PROXY}" = "1" ]; then

@@ -1,5 +1,5 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+. "${CCG_COMPOSER_HOME}"/lib/logging
 
 pip_proxy() {
     # pip default{

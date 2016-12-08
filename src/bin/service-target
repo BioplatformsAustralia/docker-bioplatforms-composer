@@ -1,5 +1,5 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/lib.sh
+. "${CCG_COMPOSER_HOME}"/lib/logging
 
 # A generic script to perform a function on a docker-compose target
 
@@ -26,10 +26,9 @@ else
     fail "No target ${TARGET}"
 fi
 
-# Legacy: set some default options
-OPTS=''
+OPTS=
 if [ "${ACTION}" = "run" ]; then
-    OPTS='--rm'
+    OPTS="${DOCKER_RUN_OPTS}"
 fi
 
 set -x
