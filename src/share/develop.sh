@@ -39,5 +39,5 @@ docker run --rm ${ENV_FILE_OPT} \
     -v "$(pwd)":"$(pwd)" \
     -v "${HOME}"/.docker:/data/.docker \
     -w "$(pwd)" \
-    -i "${CCG_DOCKER_ORG}"/"${CCG_COMPOSER}":"${CCG_COMPOSER_VERSION}" \
+    -it "${CCG_DOCKER_ORG}"/"${CCG_COMPOSER}":"${CCG_COMPOSER_VERSION}" \
     "$@"
