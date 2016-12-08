@@ -30,14 +30,19 @@ if [ "$(uname)" != "Darwin" ]; then
     export DOCKER_ROUTE
 fi
 
+TTY_OPTS='--interactive --tty'
+if echo $- | grep -q "i" ; then
+    TTY_OPTS=''
+fi
+
 ENV_OPTS="$(env | sort | cut -d= -f1 | grep "^CCG_[a-zA-Z0-9_]*$" | awk '{print "-e", $1}')"
 # shellcheck disable=SC2086 disable=SC2048
-docker run --rm ${ENV_FILE_OPT} \
+docker run --rm ${TTY_OPTS} ${ENV_FILE_OPT} \
     ${ENV_OPTS} \
     -v /etc/timezone:/etc/timezone:ro \
     -v /var/run/docker.sock:/var/run/docker.sock  \
     -v "$(pwd)":"$(pwd)" \
     -v "${HOME}"/.docker:/data/.docker \
     -w "$(pwd)" \
-    -it "${CCG_DOCKER_ORG}"/"${CCG_COMPOSER}":"${CCG_COMPOSER_VERSION}" \
+    "${CCG_DOCKER_ORG}"/"${CCG_COMPOSER}":"${CCG_COMPOSER_VERSION}" \
     "$@"
