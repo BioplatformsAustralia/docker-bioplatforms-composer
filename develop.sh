@@ -30,8 +30,8 @@ if [ "$(uname)" != "Darwin" ]; then
     export DOCKER_ROUTE
 fi
 
-TTY_OPTS=''
-if echo xe | grep -q "i" ; then
+TTY_OPTS=
+if [ -t 0 ]; then
     TTY_OPTS='--interactive --tty'
 fi
 
