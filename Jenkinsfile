@@ -15,6 +15,14 @@ node {
         ''')
     }
 
+    dockerStage('Use build to build') {
+        echo "Branch is: ${env.BRANCH_NAME}"
+        echo "Build is: ${env.BUILD_NUMBER}"
+        sh('''
+            ./develop.sh build latest
+        ''')
+    }
+
     dockerStage('Sanity') {
         sh('''
             ./develop.sh
