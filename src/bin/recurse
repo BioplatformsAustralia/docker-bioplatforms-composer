@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# recursively find all Dockerfiles and call subdir-service on them
+find . -name 'Dockerfile' -print0 | xargs -I{} -n1 -0 subdir-service {} "$@"
