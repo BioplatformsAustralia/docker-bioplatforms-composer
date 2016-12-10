@@ -19,6 +19,7 @@ node {
         echo "Branch is: ${env.BRANCH_NAME}"
         echo "Build is: ${env.BUILD_NUMBER}"
         sh('''
+            ./develop.sh skeleton
             ./develop.sh build latest
         ''')
     }
