@@ -8,7 +8,7 @@
 ##   o Compose files are named docker-compose-<target>.yml
 ##   o Build services are in docker-compose-build.yml
 ##   o Build services in docker-compose-build.yml are suitable for push-ing
-##   o Prod builds rely on ${GIT_TAG}, these scripts set that for you
+##   o Prod <target>s rely on ${GIT_TAG}, these scripts set that for you
 ##
 ## Example (Build and publish a Django project):
 ##   > ./develop.sh build base                             (build base image)
@@ -25,7 +25,7 @@
 ## Example (Run Aloe tests, assuming everything is built):
 ##   > ./develop.sh up selenium -d                         (background selenium)
 ##   > ./develop.sh up teststack -d                        (background teststack)
-##   > ./develop.sh up aloe --force-recreate devaloe       (foreground aloe tests)
+##   > ./develop.sh up aloe --force-recreate teststack     (foreground aloe tests)
 ## ...and tear it down:
 ##   > ./develop.sh stop teststack                         (stop teststack)
 ##   > ./develop.sh rm teststack -v                        (rm teststack)

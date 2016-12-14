@@ -1,24 +1,41 @@
 #!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/logging
+. "${CCG_COMPOSER_HOME}"/lib/git-tag
 
-## ./develop.sh aloe <service>                   (legacy: Runs aloe against the teststack yml)
+## ./develop.sh aloe [target]                    (legacy: Runs aloe against the given yaml stack)
+
+STACK=teststack
 
 stop_all() {
+    trap "echo 'Exiting'" SIGHUP SIGINT SIGTERM
     stop aloe
-    stop teststack
+    stop "${STACK}"
     stop selenium
 }
 
 
 trap "stop_all; exit" SIGHUP SIGINT SIGTERM
 
+
+# check we have an argument to find the stack to run tests against
+if [ "${1}x" = "x" ]; then
+    warn "You probably want one of these:"
+    warn "> ./develop.sh aloe teststack"
+    warn "> ./develop.sh aloe prod"
+    fail "No target provided."
+else
+    STACK=${1}
+fi
+
+git_tag
+
 # start selenium in the background
-pull selenium --ignore-pull-failures
 up selenium --force-recreate -d
 
 # start the test stack in the background
-stop teststack
-rm teststack --all -v --force
-up teststack --force-recreate -d
+stop "${STACK}"
+rm "${STACK}" --all -v --force
+up "${STACK}" --force-recreate -d
 
 # run aloe
 stop aloe
@@ -28,8 +45,6 @@ run aloe "$@"
 local rval=$?
 set -e
  
-# stop test stack and selenium
-stop teststack
-stop selenium
+stop_all
 
 exit $rval
