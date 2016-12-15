@@ -1,0 +1,8 @@
+#!/bin/sh
+
+## ./develop.sh django-admin                     (run django-admin in dev)
+
+run - runserver django-admin "$@"
+rval=$?
+stop
+exit "${rval}"
