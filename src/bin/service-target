@@ -1,5 +1,6 @@
 #!/bin/sh
 . "${CCG_COMPOSER_HOME}"/lib/logging
+. "${CCG_COMPOSER_HOME}"/lib/git-tag
 
 # A generic script to perform a function on a docker-compose target
 
@@ -30,6 +31,8 @@ OPTS=
 if [ "${ACTION}" = "run" ]; then
     OPTS="${DOCKER_RUN_OPTS}"
 fi
+
+git_tag
 
 set -x
 exec docker-compose --project-name "${CCG_PROJECT}" -f "${TARGET}" "${ACTION}" ${OPTS} "$@"
