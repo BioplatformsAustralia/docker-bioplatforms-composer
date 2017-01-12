@@ -3,12 +3,7 @@
 
 # figure out what branch/tag we are on
 git_tag() {
-    if [ -d .git ]; then
-        info 'Found a git repo'
-    else
-        info "Not a git repo"
-        return
-    fi
+    git rev-parse --is-inside-work-tree
 
     set +e
     GIT_TAG=$(git describe --abbrev=0 --tags 2> /dev/null)
