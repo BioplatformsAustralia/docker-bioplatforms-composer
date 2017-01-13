@@ -6,6 +6,7 @@ ENV PATH ${CCG_COMPOSER_HOME}/bin:$PATH
 
 RUN cat /etc/issue
 RUN apk add --update \
+  curl \
   diffutils \
   git \
   su-exec

@@ -23,3 +23,15 @@ if [ -f .env ]; then
 else
     warn "No .env file"
 fi
+
+if curl --output /dev/null --silent --head "${http_proxy}"; then
+    info "Connected to http proxy"
+else
+    warn "Failed to connect to http proxy"
+fi
+
+if curl --output /dev/null --silent --head "${PIP_INDEX_URL}"; then
+    info "Connected to pip index"
+else
+    warn "Failed to connect to pip index"
+fi
