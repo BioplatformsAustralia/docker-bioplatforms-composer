@@ -13,13 +13,16 @@ git_tag() {
     # otherwise ask git
     GIT_BRANCH="${BRANCH_NAME}"
     if [ "${GIT_BRANCH}x" = "x" ]; then
+        set +e
         GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
+        set -e
     fi
     info "Git branch: ${GIT_BRANCH}"
 
     # fail when we don't know branch
     if [ "${GIT_BRANCH}" = "HEAD" ]; then
-        fail 'Git clone is in detached HEAD state and BRANCH_NAME not set'
+        warn 'Git clone is in detached HEAD state and BRANCH_NAME not set'
+        GIT_BRANCH='_detached_'
     fi
 
     # only use tags when on master (prod) branch
