@@ -1,43 +1,67 @@
 #!/bin/sh
 . "${CCG_COMPOSER_HOME}"/lib/logging
 
+# Psuedocode:
+#
+# TAG = Latest tag from commits on this branch
+# if no TAG
+#     TAG = BRANCH
+# else
+#     if TAG is not HEAD
+#         VERSION = BRANCH-post-TAG
+#     else
+#         VERSION = TAG
+
+
 # figure out what branch/tag we are on
 git_tag() {
-    git rev-parse --is-inside-work-tree
+    # check we are inside a git tree, this will fail if not
+    git rev-parse --is-inside-work-tree > /dev/null
 
-    set +e
-    GIT_TAG=$(git describe --abbrev=0 --tags 2> /dev/null)
-    set -e
-
-    # jenksins sets BRANCH_NAME, so we use that
-    # otherwise ask git
+    # ci sets BRANCH_NAME, otherwise ask git
     GIT_BRANCH="${BRANCH_NAME}"
     if [ "${GIT_BRANCH}x" = "x" ]; then
         set +e
         GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
         set -e
     fi
-    info "Git branch: ${GIT_BRANCH}"
 
-    # fail when we don't know branch
+    # we don't always know branch
     if [ "${GIT_BRANCH}" = "HEAD" ]; then
         warn 'Git clone is in detached HEAD state and BRANCH_NAME not set'
         GIT_BRANCH='_detached_'
     fi
+    info "GIT_BRANCH: ${GIT_BRANCH}"
 
-    # only use tags when on master (prod) branch
-    if [ "${GIT_BRANCH}" != "master" ]; then
-        info 'Ignoring tags, not on master branch'
-        GIT_TAG=${GIT_BRANCH}
-    fi
+    # https://stackoverflow.com/questions/1404796/how-to-get-the-latest-tag-name-in-current-branch-in-git
+    # GIT_HEAD_TAG: We only want a git tag for the current commit (HEAD) on the current branch
+    # GIT_LATEST_TAG: Latest tag for commits on this branch
+    set +e
+    GIT_HEAD_TAG=$(git describe --exact-match --abbrev=0 2> /dev/null)
+    GIT_LATEST_TAG=$(git describe --abbrev=0 --tags 2> /dev/null)
+    set -e
+
+    info "GIT_HEAD_TAG: ${GIT_HEAD_TAG}"
+    info "GIT_LATEST_TAG: ${GIT_LATEST_TAG}"
 
     # if no git tag, then use branch name
-    if [ "x${GIT_TAG}" = "x" ]; then
+    if [ "x${GIT_LATEST_TAG}" = "x" ]; then
         info 'No git tag set, using branch name'
-        GIT_TAG=${GIT_BRANCH}
+        BUILD_VERSION=${GIT_BRANCH}
+    else
+        # Use GIT_HEAD_TAG if there is one, otherwise BRANCH-post-GIT_LATEST_TAG
+        if [ "x${GIT_HEAD_TAG}" = "x" ]; then
+            BUILD_VERSION="${GIT_BRANCH}-post-${GIT_LATEST_TAG}"
+        else
+            BUILD_VERSION=${GIT_HEAD_TAG}
+        fi
     fi
 
-    export GIT_TAG GIT_BRANCH
+    export BUILD_VERSION GIT_HEAD_TAG GIT_LATEST_TAG GIT_BRANCH
 
-    success "Git tag: ${GIT_TAG}"
+    # GIT_TAG is the legacy variable name, set it as well
+    GIT_TAG=$BUILD_VERSION
+    export GIT_TAG
+
+    success "BUILD_VERSION: ${BUILD_VERSION}"
 }
