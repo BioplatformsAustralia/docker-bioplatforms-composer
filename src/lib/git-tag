@@ -37,7 +37,7 @@ git_tag() {
     # GIT_HEAD_TAG: We only want a git tag for the current commit (HEAD) on the current branch
     # GIT_LATEST_TAG: Latest tag for commits on this branch
     set +e
-    GIT_HEAD_TAG=$(git describe --exact-match --abbrev=0 2> /dev/null)
+    GIT_HEAD_TAG=$(git describe --exact-match --abbrev=0 --tags 2> /dev/null)
     GIT_LATEST_TAG=$(git describe --abbrev=0 --tags 2> /dev/null)
     set -e
 
