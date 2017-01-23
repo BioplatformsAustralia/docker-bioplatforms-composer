@@ -1,4 +1,4 @@
-FROM docker/compose:1.9.0
+FROM docker/compose:1.10.0
 MAINTAINER https://github.com/muccg/
 
 ENV CCG_COMPOSER_HOME /usr/local/ccg-composer
