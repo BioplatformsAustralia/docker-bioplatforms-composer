@@ -1,0 +1,22 @@
+#!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/logging
+
+## ./develop.sh rdrf-update-test-zips
+
+export_zip() {
+    stop teststack
+    rm teststack --all -v --force
+    up teststack --force-recreate -d
+    ${CCG_COMPOSER_HOME}/bin/exec teststack runservertest /app/docker-entrypoint.sh django-admin.py migrate
+
+    set +e
+    ${CCG_COMPOSER_HOME}/bin/exec teststack runservertest /app/docker-entrypoint.sh django-admin.py import "${1}" --force 
+    ${CCG_COMPOSER_HOME}/bin/exec teststack runservertest /app/docker-entrypoint.sh django-admin.py export registry --filename "${1}" --registry-code "${2}"
+    set -e
+
+    stop teststack
+}
+
+export_zip /app/rdrf/rdrf/features/exported_data/dd.zip dd
+export_zip /app/rdrf/rdrf/features/exported_data/fh.zip fh
+
