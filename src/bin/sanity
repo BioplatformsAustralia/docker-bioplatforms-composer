@@ -1,5 +1,6 @@
 #!/bin/sh
 . "${CCG_COMPOSER_HOME}"/lib/logging
+. "${CCG_COMPOSER_HOME}"/lib/git-tag
 
 ## ./develop.sh sanity                           (Print some info for sanity checking)
 
@@ -35,3 +36,4 @@ if curl --output /dev/null --silent --head "${PIP_INDEX_URL}"; then
 else
     warn "Failed to connect to pip index"
 fi
+git_tag
