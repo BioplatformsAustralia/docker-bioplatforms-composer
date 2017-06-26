@@ -1,5 +1,5 @@
 FROM docker/compose:1.14.0
-MAINTAINER https://github.com/muccg/
+LABEL maintainer "https://github.com/muccg/"
 
 ENV CCG_COMPOSER_HOME /usr/local/ccg-composer
 ENV PATH ${CCG_COMPOSER_HOME}/bin:$PATH
