@@ -1,11 +1,11 @@
-FROM docker/compose:1.14.0
+FROM docker/compose:1.15.0
 LABEL maintainer "https://github.com/muccg/"
 
 ENV CCG_COMPOSER_HOME /usr/local/ccg-composer
 ENV PATH ${CCG_COMPOSER_HOME}/bin:$PATH
 
 RUN cat /etc/issue
-RUN apk add --update \
+RUN apk add --no-cache --update \
   curl \
   diffutils \
   git \
