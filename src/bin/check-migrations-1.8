@@ -1,0 +1,9 @@
+#!/bin/sh
+
+## ./develop.sh check-migrations-1.8             (check django migrations for django 1.8)
+
+run - runserver django-admin makemigrations --dry-run --noinput -e
+rval=$?
+stop
+
+exec expr $rval = 1 > /dev/null

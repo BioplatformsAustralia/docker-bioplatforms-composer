@@ -2,7 +2,7 @@
 . "${CCG_COMPOSER_HOME}"/lib/logging
 . "${CCG_COMPOSER_HOME}"/lib/git-tag
 
-## ./develop.sh unittests [target]                    (Runs unittests against the given yaml stack)
+## ./develop.sh unittests [target]               (runs unittests against the given yaml stack)
 
 STACK=teststack
 
