@@ -19,4 +19,5 @@ export_zip() {
 
 export_zip /app/rdrf/rdrf/features/exported_data/dd.zip dd
 export_zip /app/rdrf/rdrf/features/exported_data/fh.zip fh
+export_zip /app/rdrf/rdrf/features/exported_data/ang.zip ang
 
