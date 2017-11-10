@@ -1,0 +1,5 @@
+#!/bin/sh
+
+## ./develop.sh ccg-project                      prints $CCG_PROJECT
+
+echo $CCG_PROJECT
