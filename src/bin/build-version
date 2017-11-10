@@ -1,0 +1,7 @@
+#!/bin/sh
+. "${CCG_COMPOSER_HOME}"/lib/git-tag
+
+## ./develop.sh build-version                    prints $BUILD_VERSION
+
+git_tag 2>/dev/null
+echo $BUILD_VERSION
