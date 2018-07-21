@@ -47,7 +47,9 @@ set -e
  
 stop_all
 
-logs selenium --no-color > aloe-selenium.log
-logs "${STACK}" --no-color > aloe-"${STACK}".log
+ALOEOUT="data/aloe"
+mkdir -p "$ALOEOUT"
+logs selenium --no-color > "$ALOEOUT"/aloe-selenium.log
+logs "${STACK}" --no-color > "$ALOEOUT"/aloe-"${STACK}".log
 
 exit $rval

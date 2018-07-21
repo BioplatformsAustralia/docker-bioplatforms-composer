@@ -43,6 +43,8 @@ set -e
  
 stop_all
 
-logs "${STACK}" --no-color > unittests-"${STACK}".log
+UNITOUT="data/unittests"
+mkdir -p "$UNITOUT"
+logs "${STACK}" --no-color > "$UNITOUT"/unittests-"${STACK}".log
 
 exit $rval

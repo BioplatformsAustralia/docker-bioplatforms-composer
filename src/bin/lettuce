@@ -47,7 +47,9 @@ set -e
  
 stop_all
 
-logs selenium --no-color > lettuce-selenium.log
-logs "${STACK}" --no-color > lettuce-"${STACK}".log
+LETTUCEOUT=data/lettuce
+mkdir -p "$LETTUCEOUT"
+logs selenium --no-color > "$LETTUCEOUT"/lettuce-selenium.log
+logs "${STACK}" --no-color > "$LETTUCEOUT"/lettuce-"${STACK}".log
 
 exit $rval
