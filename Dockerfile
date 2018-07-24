@@ -1,4 +1,4 @@
-FROM docker/compose:1.16.1
+FROM docker/compose:1.22.0
 LABEL maintainer "https://github.com/muccg/"
 
 ENV CCG_COMPOSER_HOME /usr/local/ccg-composer

@@ -13,10 +13,7 @@ info "DOCKER_BUILD_OPTS         (${DOCKER_BUILD_OPTS})"
 info "DOCKER_RUN_OPTS           (${DOCKER_RUN_OPTS})"
 info "git                       ($(git --version))"
 info "pwd                       ($(pwd))"
-info "DOCKER_ROUTE              (${DOCKER_ROUTE})"
 # shellcheck disable=2154
-info "http_proxy                (${http_proxy})"
-info "PIP_INDEX_URL             (${PIP_INDEX_URL})"
 info "git status -s"
 git status -s
 if [ -f .env ]; then
@@ -25,15 +22,4 @@ else
     warn "No .env file"
 fi
 
-if curl --output /dev/null --silent --head "${http_proxy}"; then
-    info "Connected to http proxy"
-else
-    warn "Failed to connect to http proxy"
-fi
-
-if curl --output /dev/null --silent --head "${PIP_INDEX_URL}"; then
-    info "Connected to pip index"
-else
-    warn "Failed to connect to pip index"
-fi
 git_tag

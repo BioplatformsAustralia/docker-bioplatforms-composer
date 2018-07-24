@@ -13,10 +13,6 @@ export DOCKER_NO_CACHE DOCKER_PULL
 export DOCKER_BUILD_OPTS DOCKER_RUN_OPTS
 
 add-ccg-user
-. "${CCG_COMPOSER_HOME}"/lib/http-proxy
-http_proxy
-. "${CCG_COMPOSER_HOME}"/lib/pip-proxy
-pip_proxy
 
 # shellcheck disable=SC2086 disable=SC2048
 exec su-exec ccg "$@"

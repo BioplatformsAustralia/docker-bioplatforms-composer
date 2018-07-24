@@ -5,10 +5,8 @@ set -e
 : "${CCG_DOCKER_ORG:=muccg}"
 : "${CCG_COMPOSER:=ccg-composer}"
 : "${CCG_COMPOSER_VERSION:=latest}"
-: "${CCG_PIP_PROXY=0}"
-: "${CCG_HTTP_PROXY=0}"
 
-export CCG_DOCKER_ORG CCG_COMPOSER CCG_COMPOSER_VERSION CCG_PIP_PROXY CCG_HTTP_PROXY
+export CCG_DOCKER_ORG CCG_COMPOSER CCG_COMPOSER_VERSION
 
 # ensure we have an .env file
 ENV_FILE_OPT=''
@@ -19,15 +17,6 @@ if [ -f .env ]; then
     set -e
 else
     echo ".env file not found, settings such as project name and proxies will not be set"
-fi
-
-# Pass through the ip of the host if we can
-# There is no docker0 interface on Mac OS, so don't do any proxy detection
-if [ "$(uname)" != "Darwin" ]; then
-    set +e
-    DOCKER_ROUTE=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
-    set -e
-    export DOCKER_ROUTE
 fi
 
 TTY_OPTS=
