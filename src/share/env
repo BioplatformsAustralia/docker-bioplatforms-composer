@@ -1,2 +1,2 @@
 #!/bin/sh
-CCG_PROJECT=set-this-to-your-project-name
+BIOPLATFORMS_PROJECT=set-this-to-your-project-name

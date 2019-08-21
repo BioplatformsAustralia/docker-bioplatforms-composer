@@ -1,6 +1,6 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/logging
-. "${CCG_COMPOSER_HOME}"/lib/git-tag
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/logging
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/git-tag
 
 ## ./develop.sh unittests [target]               (runs unittests against the given yaml stack)
 

@@ -5,4 +5,4 @@
 # Print out the usage doc string from all the tools
 BASEDIR=$(dirname "$0")
 grep -h "^##" "${BASEDIR}"/* | sort | uniq
-cat "${CCG_COMPOSER_HOME}"/share/README.txt
+cat "${BIOPLATFORMS_COMPOSER_HOME}"/share/README.txt

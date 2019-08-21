@@ -1,6 +1,6 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/logging
-. "${CCG_COMPOSER_HOME}"/lib/git-tag
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/logging
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/git-tag
 
 ## ./develop.sh aloe [target]                    (legacy: Runs aloe against the given yaml stack)
 

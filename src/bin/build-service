@@ -1,6 +1,6 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/logging
-. "${CCG_COMPOSER_HOME}"/lib/git-tag
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/logging
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/git-tag
 
 # A generic script to perform a function on a service from docker-compose-build.yml
 

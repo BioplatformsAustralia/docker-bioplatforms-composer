@@ -1,13 +1,13 @@
-docker-ccg-docker
+docker-bioplatforms-composer
 =================
 
-Its the official docker compose container with some convenience CCG sh scripts.
+Its the official docker compose container with some convenience Bioplatforms sh scripts.
 
 Build using docker:
 
 .. code:: bash
 
- > docker build -t muccg/ccg-composer:latest .
+ > docker build -t bioplatformsaustralia/bioplatforms-composer:latest .
 
 Then, it can build itself:
 

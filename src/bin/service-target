@@ -1,6 +1,6 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/logging
-. "${CCG_COMPOSER_HOME}"/lib/git-tag
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/logging
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/git-tag
 
 # A generic script to perform a function on a docker-compose target
 
@@ -35,4 +35,4 @@ fi
 git_tag
 
 set -x
-exec docker-compose --project-name "${CCG_PROJECT}" -f "${TARGET}" "${ACTION}" ${OPTS} "$@"
+exec docker-compose --project-name "${BIOPLATFORMS_PROJECT}" -f "${TARGET}" "${ACTION}" ${OPTS} "$@"

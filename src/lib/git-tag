@@ -1,5 +1,5 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/logging
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/logging
 
 # pseudo-code:
 #

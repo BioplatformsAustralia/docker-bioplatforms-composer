@@ -1,21 +1,21 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/logging
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/logging
 
 # TODO
 # Check $1 is a path to a Dockerfile
 
 # Context is the directory path of the Dockerfile
-CCG_CONTEXT=$(dirname "${1}")
+BIOPLATFORMS_CONTEXT=$(dirname "${1}")
 
 # Create a potential image tag from path, replace / with - and trim
-CCG_PATH_TAG=$(printf '%s' "${CCG_CONTEXT}" | sed 's/^\.\///')
-CCG_PATH_TAG=$(printf '%s' "${CCG_PATH_TAG}" | tr '/' '-')
+BIOPLATFORMS_PATH_TAG=$(printf '%s' "${BIOPLATFORMS_CONTEXT}" | sed 's/^\.\///')
+BIOPLATFORMS_PATH_TAG=$(printf '%s' "${BIOPLATFORMS_PATH_TAG}" | tr '/' '-')
 
-export CCG_CONTEXT CCG_PATH_TAG
+export BIOPLATFORMS_CONTEXT BIOPLATFORMS_PATH_TAG
 
 info "Dockerfile ${1}"
-info "CCG_CONTEXT ${CCG_CONTEXT}"
-info "CCG_PATH_TAG ${CCG_PATH_TAG}"
+info "BIOPLATFORMS_CONTEXT ${BIOPLATFORMS_CONTEXT}"
+info "BIOPLATFORMS_PATH_TAG ${BIOPLATFORMS_PATH_TAG}"
 shift
 info "Args ${*}"
 

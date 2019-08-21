@@ -1,0 +1,5 @@
+#!/bin/sh
+
+## ./develop.sh bioplatforms-project                      prints $BIOPLATFORMS_PROJECT
+
+echo $BIOPLATFORMS_PROJECT

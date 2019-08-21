@@ -1,6 +1,6 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/logging
-. "${CCG_COMPOSER_HOME}"/lib/git-tag
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/logging
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/git-tag
 
 ## ./develop.sh sanity                           (Print some info for sanity checking)
 
@@ -8,7 +8,7 @@ info 'sanity'
 info "whoami                    ($(whoami))"
 info "id                        ($(id))"
 info "docker-compose            ($(docker-compose --version))"
-info "CCG_PROJECT               (${CCG_PROJECT})"
+info "BIOPLATFORMS_PROJECT               (${BIOPLATFORMS_PROJECT})"
 info "DOCKER_BUILD_OPTS         (${DOCKER_BUILD_OPTS})"
 info "DOCKER_RUN_OPTS           (${DOCKER_RUN_OPTS})"
 info "git                       ($(git --version))"

@@ -1,5 +1,5 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/git-tag
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/git-tag
 
 ## ./develop.sh run-builder                      (Run a build, typically produces a release tarball)
 

@@ -1,8 +1,8 @@
 FROM docker/compose:1.22.0
-LABEL maintainer "https://github.com/muccg/"
+LABEL maintainer "https://github.com/bioplatformsaustralia/"
 
-ENV CCG_COMPOSER_HOME /usr/local/ccg-composer
-ENV PATH ${CCG_COMPOSER_HOME}/bin:$PATH
+ENV BIOPLATFORMS_COMPOSER_HOME /usr/local/bioplatforms-composer
+ENV PATH ${BIOPLATFORMS_COMPOSER_HOME}/bin:$PATH
 
 RUN cat /etc/issue
 RUN apk add --no-cache --update \
@@ -15,8 +15,8 @@ RUN env | sort
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
-RUN mkdir -p ${CCG_COMPOSER_HOME}
-COPY src/ ${CCG_COMPOSER_HOME}/
+RUN mkdir -p ${BIOPLATFORMS_COMPOSER_HOME}
+COPY src/ ${BIOPLATFORMS_COMPOSER_HOME}/
 
 WORKDIR /data
 ENV HOME /data

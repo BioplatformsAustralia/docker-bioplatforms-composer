@@ -5,16 +5,16 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: muccg/ccg-composer:${GIT_BRANCH}
+    image: bioplatformsaustralia/bioplatforms-composer:${GIT_BRANCH}
 
   prod:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: muccg/ccg-composer:${BUILD_VERSION}
+    image: bioplatformsaustralia/bioplatforms-composer:${BUILD_VERSION}
  
   latest:
     extends:
       file: docker-compose-build.yml
       service: prod
-    image: muccg/ccg-composer:latest
+    image: bioplatformsaustralia/bioplatforms-composer:latest

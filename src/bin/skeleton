@@ -1,17 +1,17 @@
 #!/bin/sh
-. "${CCG_COMPOSER_HOME}"/lib/logging
+. "${BIOPLATFORMS_COMPOSER_HOME}"/lib/logging
 
 ## ./develop.sh skeleton                         (Update/Create develop.sh/.env)
 
 update_required=0
 if [ -f develop.sh ]; then
     info 'develop.sh: found existing, any changes will be shown:'
-    diff "${CCG_COMPOSER_HOME}"/share/develop.sh develop.sh
+    diff "${BIOPLATFORMS_COMPOSER_HOME}"/share/develop.sh develop.sh
     update_required=$?
 fi
 
 if [ "${update_required}" = 1 ]; then
-    cp "${CCG_COMPOSER_HOME}"/share/develop.sh .
+    cp "${BIOPLATFORMS_COMPOSER_HOME}"/share/develop.sh .
     info "develop.sh: Updated"
 else
     info "develop.sh: No update required"
@@ -20,7 +20,7 @@ fi
 if [ -f .env ]; then
     info ".env: already exists, not changing"
 else
-    cp "${CCG_COMPOSER_HOME}"/share/env .env
-    info ".env: Created, please edit CCG_PROJECT and add any vars required in environment"
+    cp "${BIOPLATFORMS_COMPOSER_HOME}"/share/env .env
+    info ".env: Created, please edit BIOPLATFORMS_PROJECT and add any vars required in environment"
 fi
 success ''

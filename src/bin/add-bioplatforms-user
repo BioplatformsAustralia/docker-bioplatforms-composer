@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # de-escalate privileges at run time based on user config with defaults
-id -u ccg > /dev/null 2>&1
+id -u bioplatforms > /dev/null 2>&1
 if [ $? -ne 0 ]; then
     # add a user at runtime and then use su-exec to run as that user
-    addgroup -g "${GROUPID}" ccg
-    adduser -D -h /data -H -S -u "${USERID}" -G ccg ccg
+    addgroup -g "${GROUPID}" bioplatforms
+    adduser -D -h /data -H -S -u "${USERID}" -G bioplatforms bioplatforms
 
     # add our user to the docker group (UID from the host), so we have permission to talk to the docker socket 
     DOCKER_GID=$(stat -c '%g' /var/run/docker.sock)
@@ -14,5 +14,5 @@ if [ $? -ne 0 ]; then
         addgroup -g "${DOCKER_GID}" docker
     fi
     DOCKER_GROUP=$(getent group "${DOCKER_GID}" | awk -F':' '{print $1}')
-    adduser ccg "${DOCKER_GROUP}"
+    adduser bioplatforms "${DOCKER_GROUP}"
 fi
